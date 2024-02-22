@@ -60,6 +60,9 @@ class SummernoteWidgetBase(forms.Textarea):
 
 
 class SummernoteWidget(SummernoteWidgetBase):
+	
+	template_name = 'django_summernote/widget_iframe.html'
+	
     def render(self, name, value, attrs=None, **kwargs):
         summernote_settings = self.summernote_settings()
         summernote_settings.update(self.attrs.get('summernote', {}))
@@ -77,11 +80,14 @@ class SummernoteWidget(SummernoteWidgetBase):
             'height': summernote_settings['height'],
         }
 
-        html += render_to_string('django_summernote/widget_iframe.html', context)
+        html += render_to_string(template_name, context)
         return mark_safe(html)
 
 
 class SummernoteInplaceWidget(SummernoteWidgetBase):
+	
+	template_name = 'django_summernote/widget_inplace.html'
+	
     def _media(self):
         config = get_config()
         return forms.Media(
@@ -114,7 +120,7 @@ class SummernoteInplaceWidget(SummernoteWidgetBase):
             'CSRF_COOKIE_NAME': django_settings.CSRF_COOKIE_NAME,
         }
 
-        html += render_to_string('django_summernote/widget_inplace.html', context)
+        html += render_to_string(self.template_name, context)
         return mark_safe(html)
 
     def final_attr(self, attr):

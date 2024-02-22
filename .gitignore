@@ -57,3 +57,6 @@ djs_playground/static
 .tool-versions
 .direnv
 .DS_Store
+
+*.out
+*.geany
