@@ -67,11 +67,9 @@ class SummernoteWidget(SummernoteWidgetBase):
 
     template = 'django_summernote/widget_iframe.html'
 
-    def render(self, name, value, attrs=None, **kwargs):
+    def get_subcontext(self, attrs=None):
         summernote_settings = self.summernote_settings()
         summernote_settings.update(self.attrs.get('summernote', {}))
-
-        html = super().render(name, value, attrs=attrs, **kwargs)
         context = {
             'id': attrs['id'],
             'id_safe': attrs['id'].replace('-', '_'),
@@ -83,7 +81,11 @@ class SummernoteWidget(SummernoteWidgetBase):
             'width': summernote_settings['width'],
             'height': summernote_settings['height'],
         }
+        return context
 
+    def render(self, name, value, attrs=None, **kwargs):
+        html = super().render(name, value, attrs=attrs, **kwargs)
+        context = self.get_subcontext(attrs=attrs)
         html += render_to_string(self.template, context)
         return mark_safe(html)
 

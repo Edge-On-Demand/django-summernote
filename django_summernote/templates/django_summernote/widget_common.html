@@ -32,7 +32,7 @@ function initSummernote_{{ id_safe }}() {
             );
             nEditable.outerHeight(height);
         }
-        
+
         var initEditor = function() {
             $sn.summernote($.extend(settings, {
 {% if iframe %}
@@ -96,7 +96,7 @@ function initSummernote_{{ id_safe }}() {
                         var attachmentData = origin.dataset;
                         $nImageInput = $nEditor.find('.note-image-input');
                         $nImageInput.fileupload();
-                        var jqXHR = $nImageInput.fileupload('send', 
+                        var jqXHR = $nImageInput.fileupload('send',
                             {
                                 files: files,
                                 formData: $.extend({csrfmiddlewaretoken: csrftoken}, attachmentData),

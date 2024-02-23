@@ -18,7 +18,7 @@
     <body>
         <div id="summernote"></div>
     </body>
-    {% include "django_summernote/widget_common.html" with iframe=True %}
+    {% include include_template_name with iframe=True %}
     <script>
     initSummernote_{{ id_safe }}();
     </script>

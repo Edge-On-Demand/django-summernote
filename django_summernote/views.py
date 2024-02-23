@@ -16,7 +16,11 @@ logger = logging.getLogger(__name__)
 
 
 class SummernoteEditor(TemplateView):
+    # This is the base page boilerplate.
     template_name = 'django_summernote/widget_iframe_editor.html'
+
+    # This renders the actual Javascript, loaded via an {% include %}.
+    include_template_name = "django_summernote/widget_common.html"
 
     def __init__(self):
         super().__init__()
@@ -49,6 +53,7 @@ class SummernoteEditor(TemplateView):
         context['id_safe'] = self.kwargs['id'].replace('-', '_')
         context['css'] = self.css
         context['js'] = self.js
+        context['include_template_name'] = self.include_template_name
         context['config'] = get_config()
 
         return context
